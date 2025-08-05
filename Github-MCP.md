@@ -64,22 +64,27 @@ You can set up the GitHub MCP server either remotely (recommended) or locally. C
 
 ```json
 {
-  "servers": {
-    "github": {
-      "url": "https://api.githubcopilot.com/mcp/",
-      "headers": {
-        "Authorization": "Bearer ${input:github_token}"
-      }
-    }
-  },
-  "inputs": [
-    {
-      "id": "github_token",
-      "type": "promptString",
-      "description": "GitHub Personal Access Token",
-      "password": true
-    }
-  ]
+    "servers": {
+        "github": {
+            "command": "npx",
+            "args": [
+                "-y",
+                "@modelcontextprotocol/server-github"
+            ],
+            "env": {
+                "GITHUB_PERSONAL_ACCESS_TOKEN": "${input:github_token}"
+            },
+            "type": "stdio"
+        }
+    },
+    "inputs": [
+        {
+            "id": "github_token",
+            "type": "promptString",
+            "description": "GitHub Personal Access Token",
+            "password": true
+        }
+    ]
 }
 ```
 
